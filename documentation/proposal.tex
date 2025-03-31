@@ -152,23 +152,70 @@ partially correct or sometimes completely wrong answers.
 \newpage
 
 \section{Related Works}
-Doe (2022) proposed a hybrid recommendation framework for scientific article
-recommendation by constructing a large-scale citation network comprising 190,381
-articles from 70 journals spanning statistics, econometrics, and computer science
-from 1981 to 2022. The framework integrates network-based citation patterns with
-content-based semantic similarities. To enhance content-based recommendations,
-OpenAI’s text-embedding-3-small model was employed to generate embedding vectors
-for article abstracts, ensuring computational efficiency and embedding stability
-for handling dynamic academic databases.
+Recommender Systems (RS) are one of the most popular and important applications of
+Artificial Intelligence (AI). They have been widely adopted to help the users of
+many popular content sharing and e-Commerce web sites to more easily find relevant
+content, products or services. Meanwhile, Graph Learning (GL), which relates to
+machine learning applied to graph structure data, is an emerging technique of AI
+which is rapidly developing and has shown its great capability in recent years
+\textcite{wang2021graphlearningbasedrecommender}.
 
-Smith and Johnson (2023) explored the complementary nature of content-based
-filtering (CBF) and graph-based methods (GB) in academic search recommendations.
-They described how CBF analyzes abstracts to infer authors’ positions, while GB
-examines citations to capture audience responses. Their study identified nine key
-differences between CBF and GB, highlighting synergistic opportunities for hybrid
-approaches. Notably, they utilized two embedding techniques: Specter, a BERT-based
-model for encoding abstracts, and ProNE, a spectral clustering-based method applied
-to over 200M papers and 2B citations from Semantic Scholar.
+Many researchers have explored graph-based recommendation methods. For instance,
+\textcite{10.1145/3292500.3330673} employed a path-based approach for intent
+recommendation to automatically recommend user intent according to user
+historical behaviors without any input when users open the App,  similarly
+\textcite{song2022ekarexplainablemethodknowledge} also proposed a path based
+reinforcement learning method by formulating recommendation as a sequential
+decision process. While \textcite{10.1145/3109859.3109889} utilized an embedding-based
+method. Similarly, \textcite{10.1145/2939672.2939673} also used an embedding-based
+technique by exploiting the knowledge base, to design three components to extract items'
+semantic representations from structural content, textual content and visual content,
+respectively.
+
+\textcite{10.1145/2939672.2939673} used the TransR which was proposed by
+\textcite{10.3233/JIFS-202177} which is a modification to the original TransE proposed
+by \textcite{NIPS2013_1cecc7a7}.  TransE and TransR are both methods to represent
+knowledge graphs (like "Paris > capitalof > France") as numerical vectors for AI.
+TransE treats relationships as simple translations in one shared space
+(e.g., "Paris + capitalof = France"). It’s fast but struggles with complex
+relationships (e.g., one person writing many books). TransR fixes this by first
+projecting entities (like "Paris") into a custom space for each relationship before
+translating, making it better for tricky cases but slower. Think of TransE as a
+one-size-fits-all map, while TransR uses different maps for different roads.
+
+Graph based methods have also been researched for academic paper recommendation.
+\textcite{liu2025academicliteraturerecommendationlargescale} proposed a hybrid
+recommendation framework for scientific article recommendation by constructing a
+large-scale citation network comprising 190,381 articles from 70 journals spanning
+statistics, econometrics, and computer science from 1981 to 2022. The framework
+integrates network-based citation patterns with content-based semantic similarities.
+To enhance content-based recommendations, OpenAI’s text-embedding-3-small model was
+employed to generate embedding vectors for article abstracts, ensuring computational
+efficiency and embedding stability for handling dynamic academic databases.
+
+Another study, \textcite{church2024academicarticlerecommendationusing} explored the
+complementary nature of content-based filtering (CBF) and graph-based methods (GB)
+in academic search recommendations. They described how CBF analyzes abstracts to
+infer authors’ positions, while GB examines citations to capture audience responses.
+Their study identified nine key differences between CBF and GB, highlighting
+synergistic opportunities for hybrid approaches. Notably, they utilized two
+embedding techniques: Specter
+\textcite{cohan-etal-2020-specter}, a BERT-based model
+for encoding abstracts, and ProNE \textcite{zhang2019prone}, a spectral clustering-based method applied to
+over 200M papers and 2B citations from Semantic Scholar.
+As research in recommender systems advances, Retrieval-Augmented Generation (RAG)
+presents a promising approach to enhancing the explainability and interpretability
+of academic papers and recommendation methods. RAG combines retrieval mechanisms
+with generative models to dynamically generate responses based on external knowledge
+sources, making it an effective tool for summarizing and interpreting complex
+research articles. RAG fails on global questions directed at an entire text corpus,
+such as “What are the main themes in the dataset?”, since this is inherently a
+query-focused summarization (QFS) task, rather than an explicit retrieval task
+\textcite{edge2025localglobalgraphrag}.
+
+\textcite{edge2025localglobalgraphrag} proposed GraphRAG, a graph-based approach
+to question answering over private text corpora that scales with both the generality
+of user questions and the quantity of source text.
 \newpage
 
 \section{Design and Implementation}
@@ -207,15 +254,17 @@ through authors, and topics beyond direct citations.
 For each paper, a Text-Content Graph will be constructed from its full text
 (title, abstract, and body) to capture intra-paper semantic relationships. Key
 entities and concepts (e.g., "vision transformer," "healthcare," "deep learning")
-will be extracted as nodes using SciBERT-based Named Entity Recognition (NER) and
-KeyBERT for keyphrase identification. Edges will be defined based on relationships
-identified through multiple methods: co-occurrence (entities appearing in the same
-sentence or paragraph, weighted by frequency), dependency parsing (syntactic
-relationships like "vision transformer improves healthcare," labeled accordingly),
-and semantic similarity (cosine similarity between SciBERT embeddings of entities
-exceeding a threshold, e.g., 0.8). These graphs will be built using NetworkX for
-in-memory processing, with each node representing an entity/concept and each edge
-reflecting a contextual or syntactic link within the paper.
+will be extracted as nodes using SciBERT-based Named Entity Recognition (NER)
+\textcite{beltagy2019scibertpretrainedlanguagemodel} and KeyBERT \textcite{10295108}
+for keyphrase identification. Edges will be defined based on relationships
+identified through multiple methods: co-occurrence (entities appearing in the
+same sentence or paragraph, weighted by frequency), dependency parsing
+(syntactic relationships like "vision transformer improves healthcare,"
+labeled accordingly), and semantic similarity (cosine similarity between
+SciBERT embeddings of entities exceeding a threshold, e.g., 0.8). These
+graphs will be built using NetworkX for in-memory processing, with each node
+representing an entity/concept and each edge reflecting a contextual or syntactic
+link within the paper.
 
 \subsubsection{Semantic Embeddings}
 Semantic representations will be generated for the entire text of each paper
@@ -224,15 +273,17 @@ a transformer model fine-tuned on scientific texts, will process the full text
 in segments (e.g., 512-token chunks) due to its input constraints, producing
 contextual embeddings (768-dimensional vectors) for each segment. These will be
 averaged across segments to create a single content-based embedding per paper,
-reflecting its scientific meaning. Simultaneously, TransE will embed each paper
+reflecting its scientific meaning. Simultaneously, TransR will embed each paper
 based on its position in the knowledge graph, generating structural embeddings
 (e.g., 100-dimensional vectors) that encode relationships like citations and
-co-authorships. For each paper, the SciBERT and TransE embeddings will be combined
-(e.g., concatenated or weighted) into a unified vector representation. These vectors
-will be stored in a vector database for efficient similarity search. The full corpus
-approach ensures richer representations, capturing details from methods, results and
-discussions. The database will be updated incrementally as new papers are added,
-recomputing embeddings only for new documents to maintain scalability.
+co-authorships. For each paper, the SciBERT
+\textcite{beltagy2019scibertpretrainedlanguagemodel} and TransR
+\textcite{10.3233/JIFS-202177} embeddings will be combined (e.g., concatenated or
+weighted) into a unified vector representation. These vectors will be stored in a
+vector database for efficient similarity search. The full corpus approach ensures
+richer representations, capturing details from methods, results and discussions.
+The database will be updated incrementally as new papers are added, recomputing
+embeddings only for new documents to maintain scalability.
 \begin{figure}[H]
     \centering
     \includegraphics[width=10cm]{semanticembedding.png}
@@ -249,12 +300,12 @@ be recommended to the user. This approach ensures we suggest he most relevant pa
 \subsubsection{Semantic Search}
 Semantic Search queries the vector database using a user input, embedding it with
 SciBERT, and retrieving the top K papers based on cosine similarity of content
-embeddings, supplemented by TransE embeddings for rational alignment. Using these
+embeddings, supplemented by TransR embeddings for rational alignment. Using these
 embedding will compute similarity measures and recommend the most relevant papers.
 
 \subsubsection{Ranking}
 Each candidate is scored using a weighted combination including Citation strength,
-SciBERT similarity and TransE Similarity. The top K papers are selected according
+SciBERT similarity and TransR similarity. The top K papers are selected according
 to need.
 
 \subsection{GraphRAG Integration}
