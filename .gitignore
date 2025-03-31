@@ -1,4 +1,5 @@
 documentation/*
 !documentation/proposal.tex
+!documentation/refs.bib
 !documentation/*.png
 

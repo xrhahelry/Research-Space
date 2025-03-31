@@ -7,6 +7,9 @@
 \usepackage{titlesec}
 \usepackage{tocloft}
 \usepackage{float}
+\usepackage[colorlinks=true, allcolors=black]{hyperref}
+\usepackage[backend=biber, style=numeric, sorting=none]{biblatex}
+\addbibresource{refs.bib}
 
 \geometry{left = 1.5in, right = 1.25in, top = 1.25in, bottom = 1.25in, headheight=0.5in, footskip=0.5in}
 \renewcommand{\baselinestretch}{1.5}
@@ -21,10 +24,30 @@
 \titlespacing{\subsubsection}{0pt}{-10pt}{-20pt}
 \titleformat{\paragraph}{\bfseries\fontsize{12pt}{14pt}\selectfont}{\theparagraph}{1em}{}
 
+\renewcommand{\cftsecpresnum}{Chapter }
+\renewcommand{\cftsecaftersnum}{}
+\renewcommand{\cftsecaftersnumb}{\quad}
+\setlength{\cftsecnumwidth}{4em}
+
 \setcounter{secnumdepth}{4}
 \setcounter{tocdepth}{4}
 \renewcommand{\contentsname}{Table of Contents}
 \renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+\renewcommand{\cftdotsep}{1}
+
+\DeclareFieldFormat{labelnumberwidth}{[#1]}
+\DeclareCiteCommand{\parencite}[\mkbibbrackets]
+  {\usebibmacro{prenote}}
+  {\usebibmacro{citeindex}%
+   \usebibmacro{cite}}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}
+\renewcommand*{\multinamedelim}{\addcomma\space}
+\renewcommand*{\finalnamedelim}{\addspace and\space}
+\AtEveryBibitem{
+    \clearfield{url}
+    \clearfield{doi}
+}
 
 \title{
 \textbf{
@@ -129,14 +152,14 @@ partially correct or sometimes completely wrong answers.
 \newpage
 
 \section{Related Works}
-% Doe (2022) proposed a hybrid recommendation framework for scientific article
-% recommendation by constructing a large-scale citation network comprising 190,381
-% articles from 70 journals spanning statistics, econometrics, and computer science
-% from 1981 to 2022. The framework integrates network-based citation patterns with
-% content-based semantic similarities. To enhance content-based recommendations,
-% OpenAI’s text-embedding-3-small model was employed to generate embedding vectors
-% for article abstracts, ensuring computational efficiency and embedding stability
-% for handling dynamic academic databases.
+Doe (2022) proposed a hybrid recommendation framework for scientific article
+recommendation by constructing a large-scale citation network comprising 190,381
+articles from 70 journals spanning statistics, econometrics, and computer science
+from 1981 to 2022. The framework integrates network-based citation patterns with
+content-based semantic similarities. To enhance content-based recommendations,
+OpenAI’s text-embedding-3-small model was employed to generate embedding vectors
+for article abstracts, ensuring computational efficiency and embedding stability
+for handling dynamic academic databases.
 
 Smith and Johnson (2023) explored the complementary nature of content-based
 filtering (CBF) and graph-based methods (GB) in academic search recommendations.
@@ -222,11 +245,13 @@ recomputing embeddings only for new documents to maintain scalability.
 This approach of generating recommendation is a path based approach where we will
 simulate random walks on the citation graph and the papers with the most visits will
 be recommended to the user. This approach ensures we suggest he most relevant paper.
+
 \subsubsection{Semantic Search}
 Semantic Search queries the vector database using a user input, embedding it with
 SciBERT, and retrieving the top K papers based on cosine similarity of content
 embeddings, supplemented by TransE embeddings for rational alignment. Using these
 embedding will compute similarity measures and recommend the most relevant papers.
+
 \subsubsection{Ranking}
 Each candidate is scored using a weighted combination including Citation strength,
 SciBERT similarity and TransE Similarity. The top K papers are selected according
@@ -252,8 +277,8 @@ The expected outcome of this project is a web application designed to revolution
 
 \newpage
 
-\section*{References}
 \addcontentsline{toc}{section}{\textit{References}}
+\printbibliography
 \newpage
 
 \end{document}
