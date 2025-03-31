@@ -8,7 +8,7 @@
 \usepackage{tocloft}
 \usepackage{float}
 \usepackage[colorlinks=true, allcolors=black]{hyperref}
-\usepackage[backend=biber, style=numeric, sorting=none]{biblatex}
+\usepackage[backend=biber, style=authoryear, sorting=none]{biblatex}
 \addbibresource{refs.bib}
 
 \geometry{left = 1.5in, right = 1.25in, top = 1.25in, bottom = 1.25in, headheight=0.5in, footskip=0.5in}
@@ -35,15 +35,15 @@
 \renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
 \renewcommand{\cftdotsep}{1}
 
-\DeclareFieldFormat{labelnumberwidth}{[#1]}
-\DeclareCiteCommand{\parencite}[\mkbibbrackets]
-  {\usebibmacro{prenote}}
-  {\usebibmacro{citeindex}%
-   \usebibmacro{cite}}
-  {\multicitedelim}
-  {\usebibmacro{postnote}}
-\renewcommand*{\multinamedelim}{\addcomma\space}
-\renewcommand*{\finalnamedelim}{\addspace and\space}
+% \DeclareFieldFormat{labelnumberwidth}{[#1]}
+% \DeclareCiteCommand{\parencite}[\mkbibbrackets]
+%   {\usebibmacro{prenote}}
+%   {\usebibmacro{citeindex}%
+%    \usebibmacro{cite}}
+%   {\multicitedelim}
+%   {\usebibmacro{postnote}}
+% \renewcommand*{\multinamedelim}{\addcomma\space}
+% \renewcommand*{\finalnamedelim}{\addspace and\space}
 \AtEveryBibitem{
     \clearfield{url}
     \clearfield{doi}
@@ -158,23 +158,23 @@ many popular content sharing and e-Commerce web sites to more easily find releva
 content, products or services. Meanwhile, Graph Learning (GL), which relates to
 machine learning applied to graph structure data, is an emerging technique of AI
 which is rapidly developing and has shown its great capability in recent years
-\textcite{wang2021graphlearningbasedrecommender}.
+\parencite{wang2021graphlearningbasedrecommender}.
 
 Many researchers have explored graph-based recommendation methods. For instance,
-\textcite{10.1145/3292500.3330673} employed a path-based approach for intent
+\parencite{10.1145/3292500.3330673} employed a path-based approach for intent
 recommendation to automatically recommend user intent according to user
 historical behaviors without any input when users open the App,  similarly
-\textcite{song2022ekarexplainablemethodknowledge} also proposed a path based
+\parencite{song2022ekarexplainablemethodknowledge} also proposed a path based
 reinforcement learning method by formulating recommendation as a sequential
-decision process. While \textcite{10.1145/3109859.3109889} utilized an embedding-based
-method. Similarly, \textcite{10.1145/2939672.2939673} also used an embedding-based
+decision process. While \parencite{10.1145/3109859.3109889} utilized an embedding-based
+method. Similarly, \parencite{10.1145/2939672.2939673} also used an embedding-based
 technique by exploiting the knowledge base, to design three components to extract items'
 semantic representations from structural content, textual content and visual content,
 respectively.
 
-\textcite{10.1145/2939672.2939673} used the TransR which was proposed by
-\textcite{10.3233/JIFS-202177} which is a modification to the original TransE proposed
-by \textcite{NIPS2013_1cecc7a7}.  TransE and TransR are both methods to represent
+\parencite{10.1145/2939672.2939673} used the TransR which was proposed by
+\parencite{10.3233/JIFS-202177} which is a modification to the original TransE proposed
+by \parencite{NIPS2013_1cecc7a7}.  TransE and TransR are both methods to represent
 knowledge graphs (like "Paris > capitalof > France") as numerical vectors for AI.
 TransE treats relationships as simple translations in one shared space
 (e.g., "Paris + capitalof = France"). It’s fast but struggles with complex
@@ -184,7 +184,7 @@ translating, making it better for tricky cases but slower. Think of TransE as a
 one-size-fits-all map, while TransR uses different maps for different roads.
 
 Graph based methods have also been researched for academic paper recommendation.
-\textcite{liu2025academicliteraturerecommendationlargescale} proposed a hybrid
+\parencite{liu2025academicliteraturerecommendationlargescale} proposed a hybrid
 recommendation framework for scientific article recommendation by constructing a
 large-scale citation network comprising 190,381 articles from 70 journals spanning
 statistics, econometrics, and computer science from 1981 to 2022. The framework
@@ -193,15 +193,15 @@ To enhance content-based recommendations, OpenAI’s text-embedding-3-small mode
 employed to generate embedding vectors for article abstracts, ensuring computational
 efficiency and embedding stability for handling dynamic academic databases.
 
-Another study, \textcite{church2024academicarticlerecommendationusing} explored the
+Another study, \parencite{church2024academicarticlerecommendationusing} explored the
 complementary nature of content-based filtering (CBF) and graph-based methods (GB)
 in academic search recommendations. They described how CBF analyzes abstracts to
 infer authors’ positions, while GB examines citations to capture audience responses.
 Their study identified nine key differences between CBF and GB, highlighting
 synergistic opportunities for hybrid approaches. Notably, they utilized two
 embedding techniques: Specter
-\textcite{cohan-etal-2020-specter}, a BERT-based model
-for encoding abstracts, and ProNE \textcite{zhang2019prone}, a spectral clustering-based method applied to
+\parencite{cohan-etal-2020-specter}, a BERT-based model
+for encoding abstracts, and ProNE \parencite{zhang2019prone}, a spectral clustering-based method applied to
 over 200M papers and 2B citations from Semantic Scholar.
 As research in recommender systems advances, Retrieval-Augmented Generation (RAG)
 presents a promising approach to enhancing the explainability and interpretability
@@ -211,9 +211,9 @@ sources, making it an effective tool for summarizing and interpreting complex
 research articles. RAG fails on global questions directed at an entire text corpus,
 such as “What are the main themes in the dataset?”, since this is inherently a
 query-focused summarization (QFS) task, rather than an explicit retrieval task
-\textcite{edge2025localglobalgraphrag}.
+\parencite{edge2025localglobalgraphrag}.
 
-\textcite{edge2025localglobalgraphrag} proposed GraphRAG, a graph-based approach
+\parencite{edge2025localglobalgraphrag} proposed GraphRAG, a graph-based approach
 to question answering over private text corpora that scales with both the generality
 of user questions and the quantity of source text.
 \newpage
@@ -255,7 +255,7 @@ For each paper, a Text-Content Graph will be constructed from its full text
 (title, abstract, and body) to capture intra-paper semantic relationships. Key
 entities and concepts (e.g., "vision transformer," "healthcare," "deep learning")
 will be extracted as nodes using SciBERT-based Named Entity Recognition (NER)
-\textcite{beltagy2019scibertpretrainedlanguagemodel} and KeyBERT \textcite{10295108}
+\parencite{beltagy2019scibertpretrainedlanguagemodel} and KeyBERT \parencite{10295108}
 for keyphrase identification. Edges will be defined based on relationships
 identified through multiple methods: co-occurrence (entities appearing in the
 same sentence or paragraph, weighted by frequency), dependency parsing
@@ -277,8 +277,8 @@ reflecting its scientific meaning. Simultaneously, TransR will embed each paper
 based on its position in the knowledge graph, generating structural embeddings
 (e.g., 100-dimensional vectors) that encode relationships like citations and
 co-authorships. For each paper, the SciBERT
-\textcite{beltagy2019scibertpretrainedlanguagemodel} and TransR
-\textcite{10.3233/JIFS-202177} embeddings will be combined (e.g., concatenated or
+\parencite{beltagy2019scibertpretrainedlanguagemodel} and TransR
+\parencite{10.3233/JIFS-202177} embeddings will be combined (e.g., concatenated or
 weighted) into a unified vector representation. These vectors will be stored in a
 vector database for efficient similarity search. The full corpus approach ensures
 richer representations, capturing details from methods, results and discussions.
