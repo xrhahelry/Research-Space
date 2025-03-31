@@ -35,15 +35,6 @@
 \renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
 \renewcommand{\cftdotsep}{1}
 
-% \DeclareFieldFormat{labelnumberwidth}{[#1]}
-% \DeclareCiteCommand{\parencite}[\mkbibbrackets]
-%   {\usebibmacro{prenote}}
-%   {\usebibmacro{citeindex}%
-%    \usebibmacro{cite}}
-%   {\multicitedelim}
-%   {\usebibmacro{postnote}}
-% \renewcommand*{\multinamedelim}{\addcomma\space}
-% \renewcommand*{\finalnamedelim}{\addspace and\space}
 \AtEveryBibitem{
     \clearfield{url}
     \clearfield{doi}
@@ -175,7 +166,7 @@ respectively.
 \parencite{10.1145/2939672.2939673} used the TransR which was proposed by
 \parencite{10.3233/JIFS-202177} which is a modification to the original TransE proposed
 by \parencite{NIPS2013_1cecc7a7}.  TransE and TransR are both methods to represent
-knowledge graphs (like "Paris > capitalof > France") as numerical vectors for AI.
+knowledge graphs (like "Paris is capitalof France") as numerical vectors for AI.
 TransE treats relationships as simple translations in one shared space
 (e.g., "Paris + capitalof = France"). It’s fast but struggles with complex
 relationships (e.g., one person writing many books). TransR fixes this by first
@@ -265,6 +256,11 @@ SciBERT embeddings of entities exceeding a threshold, e.g., 0.8). These
 graphs will be built using NetworkX for in-memory processing, with each node
 representing an entity/concept and each edge reflecting a contextual or syntactic
 link within the paper.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=5cm]{textcontentgraphflowchart.png}
+    \caption{Text-Content Graph Flowchart}
+\end{figure}
 
 \subsubsection{Semantic Embeddings}
 Semantic representations will be generated for the entire text of each paper
@@ -286,12 +282,18 @@ The database will be updated incrementally as new papers are added, recomputing
 embeddings only for new documents to maintain scalability.
 \begin{figure}[H]
     \centering
-    \includegraphics[width=10cm]{semanticembedding.png}
+    \includegraphics[width=7cm]{semanticembedding.png}
     \caption{Embedding generation pipeline}
 \end{figure}
 \newpage
 
 \subsection{Generating Recommendation}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=15cm]{architecture.png}
+    \caption{High-level System Architecture Overview}
+\end{figure}
+
 \subsubsection{Citation-Based Search}
 This approach of generating recommendation is a path based approach where we will
 simulate random walks on the citation graph and the papers with the most visits will
