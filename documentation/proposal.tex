@@ -9,6 +9,8 @@
 \usepackage{float}
 \usepackage[colorlinks=true, allcolors=black]{hyperref}
 \usepackage[backend=biber, style=authoryear, sorting=none]{biblatex}
+\usepackage[acronym]{glossaries}
+\makeglossaries
 \addbibresource{refs.bib}
 
 \geometry{left = 1.5in, right = 1.25in, top = 1.25in, bottom = 1.25in, headheight=0.5in, footskip=0.5in}
@@ -68,6 +70,19 @@
 
 \date{\normalsize{Submission Date: \today}}
 
+\newacronym{scibert}{SciBERT}{Scientific Bidirectional Encoder Representations from Transformers}
+\newacronym{rag}{RAG}{Retrieval Augmented Generation}
+\newacronym{llm}{LLM}{Large Language Model}
+\newacronym{rs}{RS}{System}
+\newacronym{gl}{GL}{Graph Learning}
+\newacronym{cbf}{CBF}{Content Based Filtering}
+\newacronym{gb}{GB}{Graph Based Methods}
+\newacronym{ner}{NER}{Entity Recognition}
+\newacronym{qfs}{QFS}{Query Focused Summarization}
+\newacronym{api}{API}{Application Programming Interface}
+\newacronym{transr}{TransR}{Translational Embedding via Relation Spaces}
+\newacronym{transe}{TransE}{Translational Embedding}
+
 \begin{document}
 
 \newgeometry{margin = 0.5 in}
@@ -81,6 +96,23 @@
 
 \section*{Abstract}
 \addcontentsline{toc}{section}{\textit{Abstract}}
+In the rapidly evolving landscape of academic research, the sheer volume and velocity
+of publications pose significant challenges for researchers seeking relevant
+literature. Traditional keyword-based search methods often fail to capture the
+nuanced relationships between papers, leading to inefficiencies and information
+overload. This project proposes an innovative academic research recommendation system
+that leverages a hybrid approach integrating citation graphs, knowledge graphs, text
+embeddings, and Graph Retrieval-Augmented Generation (GraphRAG) to enhance literature
+discovery and comprehension. Using bulk dataset of research papers the methodology
+constructs interconnected graphs and text-content models, enabling citation-based and
+semantic search ranked by relevance and impact. A GraphRAG-powered "chat with PDF"
+feature offers interactive paper exploration. The expected outcome is a scalable web
+application that not only retrieves and ranks highly relevant papers but also
+facilitates deeper engagement with academic content, significantly improving research
+efficiency and understanding for scholars and students alike.
+
+\textit{Keywords:LLM, recommendation system, Graph Based Method, GraphRAG,
+Knowledge Graph, SciBERT, KeyBERT, citation graph, text-content graph}
 \newpage
 
 \addcontentsline{toc}{section}{\textit{Table of Contents}}
@@ -91,8 +123,9 @@
 \listoffigures
 \newpage
 
-\section*{Acronyms/Abbreviations}
+% \section*{Acronyms/Abbreviations}
 \addcontentsline{toc}{section}{\textit{Acronyms/Abbreviations}}
+\printglossary[type=\acronymtype, title=Acronyms/Abbreviations]
 \newpage
 
 \setcounter{page}{1}
@@ -326,6 +359,59 @@ content interactively, offering a conversational interface.
 \newpage
 
 \section{System Requirement Specification}
+\subsection{Software Specifications}
+\subsubsection{Front-End Techologies}
+\begin{itemize}
+    \item React.js (for building the user interface)
+    \vspace{-10pt}
+    \item Redux (for state management)
+    \vspace{-10pt}
+    \item Plotly (for interactive visualizations)
+\end{itemize}
+
+\subsubsection{Back-End Techologies}
+\begin{itemize}
+    \item Python (primary programming language)
+    \vspace{-10pt}
+    \item FastAPI (for building scalable and high-performance APIs)
+\end{itemize}
+\newpage
+
+\subsubsection{Database Systems}
+\begin{itemize}
+    \item Qdrant Vector Database (for storing and retrieving high-dimensional embeddings of academic papers)
+    \vspace{-10pt}
+    \item Neo4j Graph Database (for managing citation networks and knowledge graphs)
+\end{itemize}
+
+\subsubsection{Machine Learning and AI Frameworks}
+\begin{itemize}
+    \item LangChain (for retrieval-augmented generation and LLM-based interactions)
+    \vspace{-10pt}
+    \item PyTorch (for training and fine-tuning deep learning models)
+\end{itemize}
+
+\subsection{Hardware Specifications}
+\subsubsection{Minimum Hardware Requirements}
+\begin{itemize}
+    \item Processor: Intel Core i7 (or equivalent) with at least 8 cores
+    \vspace{-10pt}
+    \item RAM: 16GB (recommended: 32GB for handling large embeddings)
+    \vspace{-10pt}
+    \item Storage: SSD with at least 500GB (recommended: NVMe SSD for fast retrieval)
+    \vspace{-10pt}
+    \item GPU: NVIDIA RTX 3060 (or higher) for model inference and training
+\end{itemize}
+
+\subsubsection{Recommended Server Setup}
+\begin{itemize}
+    \item Cloud-based deployment on AWS, GCP, or Azure with GPU-enabled instances
+    \vspace{-10pt}
+    \item Dedicated database instances for Qdrant and Neo4j to optimize retrieval speed
+\end{itemize}
+This specification ensures that the system functions optimally for processing academic
+literature, generating knowledge graphs, and facilitating efficient search and
+recommendation.
 \newpage
 
 \section{Project Planning and Scheduling}
@@ -333,7 +419,12 @@ We are looking forward to completing the project in the time frame of 16 weeks b
 distributing the tasks to each member of the group . We are planning to work on our own
 on the weekdays and gather on the project day to discuss and compile the codes
 collectively. The following Gantt chart shows the time allocation for different aspects of
-our project
+our project:
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=15cm]{ganttchart.png}
+    \caption{Project Gantt Chart}
+\end{figure}
 \newpage
 
 \section{Expected Outcome}
@@ -342,6 +433,7 @@ academic literature discovery. The system will employ a hybrid approach that com
 citation networks and knowledge graphs to retrieve papers relevant to user queries.
 Recommendations will be ranked based on citation impact and semantic similarity,
 ensuring both influential and contextually relevant papers are prioritized.
+
 Additionally, the integration of GraphRAG will enable users to interactively
 explore and understand the content of papers, enhancing their research experience.
 By addressing the limitations of current academic search platforms, this project aims
