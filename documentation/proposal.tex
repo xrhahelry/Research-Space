@@ -16,7 +16,7 @@
 \setlength{\parskip}{18pt}
 \setlength{\parindent}{0pt}
 
-\titleformat{\section}{\bfseries\fontsize{16pt}{18pt}\selectfont}{\thesection}{1em}{}
+\titleformat{\section}{\bfseries\fontsize{16pt}{18pt}\selectfont}{Chapter \thesection}{1em}{}
 \titlespacing{\section}{0pt}{0pt}{-10pt}
 \titleformat{\subsection}{\bfseries\fontsize{14pt}{16pt}\selectfont}{\thesubsection}{1em}{}
 \titlespacing{\subsection}{0pt}{-10pt}{-20pt}
@@ -258,7 +258,18 @@ SciBERT similarity and TransE Similarity. The top K papers are selected accordin
 to need.
 
 \subsection{GraphRAG Integration}
-GraphRAG leverages the Text-Content Graph to enable the LLM to chat with the content of a single PDF paper, providing an interactive question-answering feature.The text-content graph constructed from the paper’s full text captures intra-paper semantic relationships. The graph comprises nodes as key entities and concepts and edges as relationships. Alongside this, the paper’s SciBERT embeddings, which encode the full-text content into 768-dimensional vectors, are included to provide detailed semantic context. The LLM processes this hybrid input within the Graph RAG framework, reasoning over the text-content graph’s structure and the embeddings’ semantic depth. When a user poses a question, the LLM traverses the graph to identify relevant relationships and uses the embeddings to extract precise content, generating a natural language response. This integration empowers users to explore a paper’s content interactively, offering a conversational interface.
+GraphRAG leverages the Text-Content Graph to enable the LLM to chat with the content
+of a single PDF paper, providing an interactive question-answering feature.The
+text-content graph constructed from the paper’s full text captures intra-paper
+semantic relationships. The graph comprises nodes as key entities and concepts
+and edges as relationships. Alongside this, the paper’s SciBERT embeddings, which
+encode the full-text content into 768-dimensional vectors, are included to provide
+detailed semantic context. The LLM processes this hybrid input within the Graph RAG
+framework, reasoning over the text-content graph’s structure and the embeddings’
+semantic depth. When a user poses a question, the LLM traverses the graph to identify
+relevant relationships and uses the embeddings to extract precise content, generating
+a natural language response. This integration empowers users to explore a paper’s
+content interactively, offering a conversational interface.
 \newpage
 
 \section{System Requirement Specification}
@@ -273,8 +284,16 @@ our project
 \newpage
 
 \section{Expected Outcome}
-The expected outcome of this project is a web application designed to revolutionize academic literature discovery. The system will employ a hybrid approach that combines citation networks and knowledge graphs to retrieve papers relevant to user queries. Recommendations will be ranked based on citation impact and semantic similarity, ensuring both influential and contextually relevant papers are prioritized. Additionally, the integration of GraphRAG will enable users to interactively explore and understand the content of papers, enhancing their research experience. By addressing the limitations of current academic search platforms, this project aims to significantly improve the efficiency and effectiveness of literature discovery for researchers and students alike.
-
+The expected outcome of this project is a web application designed to revolutionize
+academic literature discovery. The system will employ a hybrid approach that combines
+citation networks and knowledge graphs to retrieve papers relevant to user queries.
+Recommendations will be ranked based on citation impact and semantic similarity,
+ensuring both influential and contextually relevant papers are prioritized.
+Additionally, the integration of GraphRAG will enable users to interactively
+explore and understand the content of papers, enhancing their research experience.
+By addressing the limitations of current academic search platforms, this project aims
+to significantly improve the efficiency and effectiveness of literature discovery
+for researchers and students alike.
 \newpage
 
 \addcontentsline{toc}{section}{\textit{References}}
