@@ -221,7 +221,7 @@ recomputing embeddings only for new documents to maintain scalability.
 \subsubsection{Citation-Based Search}
 This approach of generating recommendation is a path based approach where we will
 simulate random walks on the citation graph and the papers with the most visits will
-be recommended to the user. This approach ensures we suggest the most relevant paper.
+be recommended to the user. This approach ensures we suggest he most relevant paper.
 \subsubsection{Semantic Search}
 Semantic Search queries the vector database using a user input, embedding it with
 SciBERT, and retrieving the top K papers based on cosine similarity of content
@@ -231,14 +231,25 @@ embedding will compute similarity measures and recommend the most relevant paper
 Each candidate is scored using a weighted combination including Citation strength,
 SciBERT similarity and TransE Similarity. The top K papers are selected according
 to need.
+
+\subsection{GraphRAG Integration}
+GraphRAG leverages the Text-Content Graph to enable the LLM to chat with the content of a single PDF paper, providing an interactive question-answering feature.The text-content graph constructed from the paper’s full text captures intra-paper semantic relationships. The graph comprises nodes as key entities and concepts and edges as relationships. Alongside this, the paper’s SciBERT embeddings, which encode the full-text content into 768-dimensional vectors, are included to provide detailed semantic context. The LLM processes this hybrid input within the Graph RAG framework, reasoning over the text-content graph’s structure and the embeddings’ semantic depth. When a user poses a question, the LLM traverses the graph to identify relevant relationships and uses the embeddings to extract precise content, generating a natural language response. This integration empowers users to explore a paper’s content interactively, offering a conversational interface.
 \newpage
 
-\section{Discussion on the Achievements}
+\section{System Requirement Specification}
 \newpage
 
-\section{Conclussion and Recommendation}
-\subsection{Limitations}
-\subsection{Future Enhancements}
+\section{Project Planning and Scheduling}
+We are looking forward to completing the project in the time frame of 16 weeks by
+distributing the tasks to each member of the group . We are planning to work on our own
+on the weekdays and gather on the project day to discuss and compile the codes
+collectively. The following Gantt chart shows the time allocation for different aspects of
+our project
+\newpage
+
+\section{Expected Outcome}
+The expected outcome of this project is a web application designed to revolutionize academic literature discovery. The system will employ a hybrid approach that combines citation networks and knowledge graphs to retrieve papers relevant to user queries. Recommendations will be ranked based on citation impact and semantic similarity, ensuring both influential and contextually relevant papers are prioritized. Additionally, the integration of GraphRAG will enable users to interactively explore and understand the content of papers, enhancing their research experience. By addressing the limitations of current academic search platforms, this project aims to significantly improve the efficiency and effectiveness of literature discovery for researchers and students alike.
+
 \newpage
 
 \section*{References}
